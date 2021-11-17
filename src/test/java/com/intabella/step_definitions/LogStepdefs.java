@@ -12,6 +12,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 
 public class LogStepdefs {
 
@@ -107,5 +108,15 @@ public class LogStepdefs {
     public void verifyItIsMaskedOrNot() {
         LoginPage loginPage = new LoginPage();
         Assert.assertEquals("password",loginPage.passWord.getAttribute("type"));
+    }
+
+    @Then("click the back button")
+    public void clickTheBackButton() {
+        Driver.get().navigate().back();
+    }
+
+    @Then("open browser again with same url")
+    public void openBrowserAgainWithSameUrl() {
+        Driver.get().get(ConfigurationReader.get("url"));
     }
 }

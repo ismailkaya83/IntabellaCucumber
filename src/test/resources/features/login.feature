@@ -1,4 +1,4 @@
-@wip
+@login
 Feature: Login as different users
 
   Background:
