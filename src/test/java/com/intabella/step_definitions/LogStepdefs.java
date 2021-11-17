@@ -13,6 +13,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import sun.rmi.runtime.Log;
 
 public class LogStepdefs {
 
@@ -66,22 +67,24 @@ public class LogStepdefs {
     @Then("the following {string} should be displayed")
     public void theFollowingShouldBeDisplayed(String expectedMessage) {
         String actualMessage = Driver.get().findElement(By.cssSelector(".alert.alert-error")).getText();
+        System.out.println("actualMessage = " + actualMessage);
         Assert.assertEquals(expectedMessage,actualMessage);
     }
 
     @When("the user clicks on the Forgot your password? link")
     public void theUserClicksOnTheLink() {
+
         new LoginPage().forgotPassword.click();
     }
 
-    @When("the user can see link")
+    @When("the user can click link")
     public void theUserCanSeeLink() {
-        Assert.assertEquals("Remember me on this computer",new LoginPage().rememberClick.getText());
+        new LoginPage().setRememberClick();
     }
 
     @And("the link should be clickable")
     public void theLinkShouldBeClickable() {
-        Assert.assertTrue(new LoginPage().rememberClick.isEnabled());
+        Assert.assertTrue(new LoginPage().rememberClick.isSelected());
     }
 
     @When("write a valid {string} in username inputbox and hit Enter button")

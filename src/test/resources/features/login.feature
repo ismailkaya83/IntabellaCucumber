@@ -69,7 +69,7 @@ Feature: Login as different users
 
   @INN-878
   Scenario: User can see "Remember me on this computer" link on the login page and it should be clickable
-    When the user can see link
+    When the user can click link
     And the link should be clickable
 
   @INN-876

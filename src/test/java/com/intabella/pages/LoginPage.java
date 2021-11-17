@@ -1,5 +1,6 @@
 package com.intabella.pages;
 
+import com.intabella.utilities.BrowserUtils;
 import com.intabella.utilities.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,7 +23,7 @@ public class LoginPage {
     @FindBy(id = "_submit")
     public WebElement login;
 
-    @FindBy(xpath = "//span[@class='custom-checkbox__text']")
+    @FindBy(xpath = "//*[@type='checkbox']")
     public WebElement rememberClick;
 
     @FindBy(xpath = "//a[normalize-space()='Forgot your password?']")
@@ -32,5 +33,11 @@ public class LoginPage {
         userName.sendKeys(username);
         passWord.sendKeys(password);
         login.click();
+    }
+
+    public void setRememberClick(){
+        BrowserUtils.waitFor(2);
+        BrowserUtils.clickWithJS(rememberClick);
+
     }
 }
