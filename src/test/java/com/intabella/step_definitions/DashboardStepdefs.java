@@ -20,7 +20,7 @@ public class DashboardStepdefs {
         Assert.assertEquals(expectedTitle, actualSubTitle);
     }
 
-    @And("the user can see own {string} in profile menu")
+    @Then("the user can see own {string} in profile menu")
     public void theUserCanSeeOwnInProfileMenu(String expectedName) {
         BrowserUtils.waitFor(2);
         String actualName = new DashboardPage().getUserName();

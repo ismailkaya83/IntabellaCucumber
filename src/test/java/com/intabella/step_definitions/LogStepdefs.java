@@ -30,7 +30,7 @@ public class LogStepdefs {
         loginPage.login(username, password);
     }
 
-    @And("the user should be able to login")
+    @Then("the user should be able to login")
     public void theUserShouldBeAbleToLogin() {
         BrowserUtils.waitFor(3);
         String actualTitle = Driver.get().getTitle();

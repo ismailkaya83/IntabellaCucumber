@@ -17,7 +17,7 @@ Feature: Login as different users
       | storemanager51  | UserUser123 | Dashboard       |
 
   @INN-871
-  Scenario Outline: The system shouldn't allow users to login to application without providing valid credentials
+  Scenario Outline: Login without valid credentials is not possible
     When the user logs in using "<username>" and "<password>"
     And the user should be able to login
     And the user copies the url and logs out
@@ -35,8 +35,8 @@ Feature: Login as different users
   @INN-872
   Scenario Outline: User can see their own username in profile menu
     When the user logs in using "<username>" and "<password>"
-    Then the user should be able to login
-    And the user can see own "<name>" in profile menu
+    And the user should be able to login
+    Then the user can see own "<name>" in profile menu
 
     Examples:
       | username        | password    | name            |
