@@ -44,7 +44,7 @@ public class DashboardStepdefs {
 
     }
 
-    @Then("click the logout button")
+    @And("click the logout button")
     public void clickTheLogoutButton() {
 
         DashboardPage dashboardPage = new DashboardPage();
@@ -53,11 +53,7 @@ public class DashboardStepdefs {
     }
 
 
-    @When("close all tabs")
-    public void closeAllTabs() {
 
-        Driver.closeDriver();
-    }
 }
 
 

@@ -11,6 +11,7 @@ import javax.xml.xpath.XPath;
 public class LoginPage {
 
     public LoginPage(){
+
         PageFactory.initElements(Driver.get(), this);
     }
 

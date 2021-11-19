@@ -2,29 +2,29 @@
 Feature: Login as different users
 
   Background:
-    Given the user is on the login page
+    Given the user opens the login page
 
   @INN-870
   Scenario Outline: Login with valid credentials for different accounts
     When the user logs in using "<username>" and "<password>"
-    Then the user should be able to login
-    And the title contains "<title>"
+    And the user should be able to login
+    Then the title contains "<title>"
 
     Examples:
-    | username        | password    | title           |
-    | user1           | UserUser123 | Quick Launchpad |
-    | salesmanager101 | UserUser123 | Dashboard       |
-    | storemanager51  | UserUser123 | Dashboard       |
+      | username        | password    | title           |
+      | user1           | UserUser123 | Quick Launchpad |
+      | salesmanager101 | UserUser123 | Dashboard       |
+      | storemanager51  | UserUser123 | Dashboard       |
 
   @INN-871
   Scenario Outline: The system shouldn't allow users to login to application without providing valid credentials
     When the user logs in using "<username>" and "<password>"
-    Then the user should be able to login
-    Then the user copies the url and logs out
-    Then the user tries to login by clicking back button
-    And the user should not be able to login
-    Then the user tries to login by pasting the same url in the browser
-    And the user should not be able to login
+    And the user should be able to login
+    And the user copies the url and logs out
+    And the user tries to login by clicking back button
+    And the user is also on the login page
+    And the user tries to login by pasting the same url in the browser
+    Then the user is also on the login page
 
     Examples:
       | username        | password    |

@@ -19,7 +19,7 @@ public class LogStepdefs {
 
     String currentUrl;
 
-    @Given("the user is on the login page")
+    @Given("the user opens the login page")
     public void theUserLoggedInAs() {
         Driver.get().get(ConfigurationReader.get("url"));
     }
@@ -27,14 +27,14 @@ public class LogStepdefs {
     @When("the user logs in using {string} and {string}")
     public void theUserLogsInUsingAnd(String username, String password) {
         LoginPage loginPage = new LoginPage();
-        loginPage.login(username,password);
+        loginPage.login(username, password);
     }
 
-    @Then("the user should be able to login")
+    @And("the user should be able to login")
     public void theUserShouldBeAbleToLogin() {
         BrowserUtils.waitFor(3);
         String actualTitle = Driver.get().getTitle();
-        Assert.assertEquals("Dashboard",actualTitle);
+        Assert.assertEquals("Dashboard", actualTitle);
     }
 
     @Then("the user copies the url and logs out")
@@ -51,7 +51,7 @@ public class LogStepdefs {
         Driver.get().navigate().to(currentUrl);
     }
 
-    @And("the user should not be able to login")
+    @And("the user is also on the login page")
     public void theUserShouldNotBeAbleToLogin() {
         BrowserUtils.waitFor(3);
         Assert.assertTrue(Driver.get().getTitle().contains("Login"));
@@ -68,7 +68,7 @@ public class LogStepdefs {
     public void theFollowingShouldBeDisplayed(String expectedMessage) {
         String actualMessage = Driver.get().findElement(By.cssSelector(".alert.alert-error")).getText();
         System.out.println("actualMessage = " + actualMessage);
-        Assert.assertEquals(expectedMessage,actualMessage);
+        Assert.assertEquals(expectedMessage, actualMessage);
     }
 
     @When("the user clicks on the Forgot your password? link")
@@ -110,16 +110,40 @@ public class LogStepdefs {
     @And("verify it is masked or not")
     public void verifyItIsMaskedOrNot() {
         LoginPage loginPage = new LoginPage();
-        Assert.assertEquals("password",loginPage.passWord.getAttribute("type"));
+        Assert.assertEquals("password", loginPage.passWord.getAttribute("type"));
     }
 
-    @Then("click the back button")
+    @And("click the back button")
     public void clickTheBackButton() {
         Driver.get().navigate().back();
     }
 
-    @Then("open browser again with same url")
+
+
+    @When("close all tabs")
+    public void closeAllTabs() {
+        currentUrl = Driver.get().getCurrentUrl();
+        Driver.closeDriver();
+    }
+
+    @And("open browser again with same url")
     public void openBrowserAgainWithSameUrl() {
-        Driver.get().get(ConfigurationReader.get("url"));
+        System.out.println("currentUrl = " + currentUrl);
+
+        Driver.get().get(currentUrl);
+    }
+
+    @Then("verify it is not dashboard page")
+    public void verifyItIsDashboardPageOrNot() {
+
+        Assert.assertFalse("Dashboard",Driver.get().getTitle().equals("Dashboard"));
+
+    }
+
+    @Then("verify it is login page")
+    public void verifyItIsLoginPage() {
+
+        Assert.assertTrue("Login",Driver.get().getTitle().equals("Login"));
+
     }
 }
